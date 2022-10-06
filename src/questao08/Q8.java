@@ -11,39 +11,77 @@ Ela sempre arruma as caixas manualmente e fica frustrada toda vez. Ela pensou qu
 
 public class Q8 {
 
+    public static void imprime(int[] vet){
+        System.out.print("|");
+
+        for(int i = 0; i < vet.length; i++){
+            System.out.print(vet[i] + "|");
+        }
+        System.out.print("\n");
+    }
+
+    //Heapify (verifica se o nó corrente é maior que os seus filhos, se não for, ajusta)
+    public static void heapify(int[] vet, int tam, int i) {
+        imprime(vet); //IMPRESSÃO MAIS COMPLETA, MOSTRANDO TODOS OS PASSOS!
+        int esq = 2 * i + 1;
+        int dir = 2 * i + 2;
+        int maior = i;
+
+        //verificando se o vetor tem ou não prioridade heap.
+        if (esq < tam && vet[esq] > vet[maior]) {
+            maior = esq;
+        }
+        if (dir < tam && vet[dir] > vet[maior]) {
+            maior = dir;
+        }
+        if (maior != i) {
+            int tmp = vet[i];
+            vet[i] = vet[maior];
+            vet[maior] = tmp;
+
+            //UMA IMPRESSÃO AQUI MOSTRA TAMBÉM ALTERAÇÕES, MAS RESUMIDAS...
+            //imprime(vet);
+
+            heapify(vet, tam, maior);
+        }
+    }
+
+
+    public static void heapSort(int[] vetor) {
+        if (vetor.length == 0) {
+            return;
+        }
+
+        int tam = vetor.length;
+
+        // Construindo uma heap Máxima
+        System.out.println("Transformando o Array em Heap Máxima:");
+        for (int i = tam / 2 - 1; i >= 0; i--) {
+            heapify(vetor, tam, i);
+        }
+        System.out.print("\n");
+
+        /* Aplicando o heapsort
+        (Resumidamente, a cada iteração, remove-se o maior nó,
+        que é substituido pelo menor nó, e chama-se o método heapify
+        pra "reconstruir" a Heap novamente) */
+
+        System.out.println("Aplicando o algoritmo Heapsort:");
+        for (int i = tam - 1; i >= 0; i--) {
+            int tmp = vetor[0];
+            vetor[0] = vetor[i];
+            vetor[i] = tmp;
+            heapify(vetor, i, 0);
+        }
+        System.out.print("\n");
+    }
+
     public static void main(String[] args) {
-        /*PriorityQueue<Integer> pq
-                = new PriorityQueue<Integer>();
-        pq.add(1);
-        pq.add(3);
-        pq.add(2);
-        pq.add(4);
-        System.out.println("The highest value in the heap:"
-                + pq.peek());
-        //pq.poll(); // POP
-        //pq.remove(3); //POP x
-        System.out.println("Impressao:");
-        Iterator<Integer> itr = pq.iterator();
-        while (itr.hasNext())
-            System.out.println(itr.next());
-*/
-        LinkedList<Integer> li = new LinkedList<>();
+        int[] array = {35, 33, 42, 10, 14, 19, 27, 44, 26, 31};
+        heapSort(array);
 
-        li.add(35);
-        li.add(33);
-        li.add(42);
-        li.add(10);
-        li.add(14);
-        li.add(19);
-        li.add(27);
-        li.add(44);
-        li.add(26);
-        li.add(31);
-
-        System.out.println("LinkedList before sorting: " + li.toString());
-
-        Collections.sort(li); // sorting the elements of the linked list
-
-        System.out.println("LinkedList after sorting in ascending order: " + li.toString());
+        System.out.println("Heapsort - Array ordenado:");
+        imprime(array);
     }
 }
+
