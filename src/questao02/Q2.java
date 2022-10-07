@@ -7,6 +7,22 @@ Escreva um algoritmo para encontrar a ordem original dos carros. Use Linked List
 
 public class Q2 {
     public static void main(String[] args) {
+        LinkedList<Integer> sequencia = new LinkedList<Integer>();
 
+        sequencia.push(sequencia,1);
+        sequencia.push(sequencia,5);
+        sequencia.push(sequencia,4);
+        sequencia.push(sequencia,3);
+        sequencia.push(sequencia,2);
+        sequencia.push(sequencia,6);
+        sequencia.push(sequencia,7);
+
+        System.out.println("Lista inicial: ");
+        sequencia.printList(sequencia.head);
+
+        sequencia.head = sequencia.mergeSort(sequencia.head);
+
+        System.out.println("\nLista final: ");
+        sequencia.printList(sequencia.head);
     }
 }
