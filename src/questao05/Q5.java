@@ -43,6 +43,9 @@ public class Q5 {
                 case 4:
                     pagina = 0;
                     break;
+                default:
+                    System.out.println("Opção incorreta!\n");
+                    break;
             }
         }
         entrada.close();
