@@ -14,11 +14,15 @@ import java.util.Stack;
         char[] fraseInvertida = new char[frase.length()];
         int count = 0;
 
+        // loop externo que percorre a string inteira
         for (int i = 0; i < frase.length(); i++) {
+            // loop interno que coloca cada char da string dentro de uma pilha até encontrar um ' '
             for (; i < frase.length() && frase.charAt(i) != ' '; i++) {
                 pilha.push(frase.charAt(i));
             }
 
+            // enquanto a pilha não estiver vazia, vai fazendo o pop dos elementos da pilha e adicionando
+            // eles no array da fraseInvertida
             while (!pilha.isEmpty()) {
                 if (frase.charAt(count) != ' ') {
                     fraseInvertida[count] = pilha.pop();
